@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block title %} Thermos -- Welcome {% endblock %} {% block content %}
+{% extends 'base.html' %} 
+{% block title %} 
+Thermos -- Welcome 
+{% endblock %} 
+{% block content %}
 <article>
     <header>
         <h1>Welcome</h1>
@@ -8,8 +12,21 @@
         <h2>Tittle {{ title }}</h2>
         <!-- <p>Text  text[1] </p> -->
         <!-- <p>Text  user__thorught </p> -->
-        <!-- <p>Text {{ user.firstname }}  {{ user.lastname }}</p> -->
-        <p>Text {{ user.initials() }}</p>
+        <!-- <p>Text  user.firstname   user.lastname </p> -->
+        <!-- <p>Text  user.initials() </p> -->
+        <!-- <p>Text   </p> -->
+
+        <!-- if and for -->
+        <h2>Recently Added</h2>
+        {% if new_bookmarks %}
+            <ul>
+                {% for bm in new_bookmarks %}
+                    <li>{{ bm.user }} added <a href="{{ bm.url }}">{{ bm.url }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            No bookmarks yet.
+        {% endif %}
     </section>
     <section>
         <h2>article section h2</h2>

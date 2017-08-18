@@ -177,9 +177,26 @@ footer h3{
 
 
 
+/* flashes styling  */
 
+.flashes ul{
+    margin: 0 0;
+    background: #ffd6a3;
+    color: #000;
 
+    list-style-type: none;
+    list-style: none;
 
+}
+
+.flashes ul {
+    background: #ffd6a3;
+    color: #000;
+}
+
+article.flashes {
+    margin-bottom: 1em;
+}
 
 
 
