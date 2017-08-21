@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Thermos -- Bookmarks for user {{user.username}}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <header>
+            <h1>Bookmarks for {{user.username}}</h1>
+        
+            <ul>
+                {% for bm in user.bookmark %}
+                    <li>
+                        <a href="{{bm.url}}">{{ bm.descripcion}}</a>
+                        <span class="timestamp">Added at {{ bm.date }}</span>
+                    </li>
+                {% else %}
+                    <li>This user has not added any bookmars yet</li>
+                {% endfor %}
+            </ul>
+        
+        </header>
+
+
+    </article>
+
+{% endblock %}
