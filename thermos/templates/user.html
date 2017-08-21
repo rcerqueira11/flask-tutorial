@@ -9,18 +9,16 @@ Thermos -- Bookmarks for user {{user.username}}
     <article>
         <header>
             <h1>Bookmarks for {{user.username}}</h1>
-        
-            <ul>
-                {% for bm in user.bookmark %}
-                    <li>
-                        <a href="{{bm.url}}">{{ bm.descripcion}}</a>
-                        <span class="timestamp">Added at {{ bm.date }}</span>
-                    </li>
-                {% else %}
-                    <li>This user has not added any bookmars yet</li>
-                {% endfor %}
-            </ul>
-        
+            <!-- user.bookmark is a slqalchemy query so its always true thats why we use the count -->
+            {% if user.bookmark.count() > 0 %}
+                <!-- nuevo nombre para bookmark sin necesidad de pasarla por el view  -->
+                {% with bookmarks=user.bookmark %}
+                    {% include "bookmark_list.html" %}
+                {% endwith %}
+            {% else %}
+                No bookmarks yet have been added yet.
+            {% endif %}
+         
         </header>
 
 

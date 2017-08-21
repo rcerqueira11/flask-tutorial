@@ -10,17 +10,13 @@ Thermos -- Welcome
     </header>
     <section>
         <h2>Recently Added</h2>
-            {% if new_bookmarks %}
-                <ul>
-                    {% for bm in new_bookmarks %}
-                        <li>
-                            <a href="{{url_for('user',username = bm.user.username)}}">{{bm.user.username}}</a>
-                            <a href="{{bm.url}}">{{bm.description}}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
+            {% if new_bookmarks.count() > 0 %}
+                <!-- nuevo nombre para bookmark sin necesidad de pasarla por el view  -->
+                {% with bookmarks=new_bookmarks %}
+                    {% include "bookmark_list.html" %}
+                {% endwith %}
             {% else %}
-                No bookmarks yet
+                No bookmarks yet have been added yet.
             {% endif %}
 
     </section>
