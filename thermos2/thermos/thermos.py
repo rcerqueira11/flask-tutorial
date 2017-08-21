@@ -1,15 +1,18 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from datetime import datetime
 
+from forms import BookmarkForm
+
 # from logging import DEBUG
 app = Flask(__name__)
 # app.logger.setLevel(DEBUG)
 app.config['SECRET_KEY'] = '\x05\xa5\xa6\xb8\xe8\x06\x0f\xa9\x98\xf4\xf8\xe5H\x92j9\xab\x16\xe5\xe0\xa8\x9e\xb9\x92'
 bookmarks = []
 
-def store_bookomark(url):
+def store_bookomark(url,description):
     bookmarks.append(dict(
         url = url,
+        description = description,
         user = "reindert",
         date = datetime.utcnow()
     ))
@@ -38,13 +41,24 @@ def index():
 # @app.route('/add')
 @app.route('/add', methods = ['GET','POST'])
 def add():
-    if request.method == "POST":
-        url = request.form['url']
-        store_bookomark(url)
-        # app.logger.debug('sored url: '+ url)
-        flash("Sored bookmark '{}'".format(url))
+    form = BookmarkForm()
+    if form.validate_on_submit():
+        url = form.url.data
+        description = form.description.data
+        store_bookomark(url, description)
+        flash("Sored bookmark '{}'".format(description))
         return redirect(url_for('index'))
-    return render_template('add.html')
+    return render_template('add.html', form = form)
+
+#Antes de lo de form
+# def add():
+#     if request.method == "POST":
+#         url = request.form['url']
+#         store_bookomark(url)
+#         # app.logger.debug('sored url: '+ url)
+#         flash("Sored bookmark '{}'".format(url))
+#         return redirect(url_for('index'))
+#     return render_template('add.html')
 
 # to use the 404 error page we use handler error
 @app.errorhandler(404)
