@@ -17,7 +17,13 @@
                 </a>
             </div>
             {{ moment(bookmark.date).fromNow()}}.
-            calling a js function that transform date and times 
+            <!-- calling a js function that transform date and times  -->
+
+            {% if current_user == bookmark.user %}
+                <span class="editlinks">
+                    <a href="{{ url_for('edit_bookmark',bookmark_id = bookmark.id)}}">Edit bookmark</a>
+                </span>
+            {% endif %}
         </li>
 
     {% endfor %}
