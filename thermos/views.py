@@ -2,7 +2,7 @@ from flask import render_template, url_for, request, redirect, flash
 from flask_login import login_required, login_user, logout_user, current_user
 
 from thermos import app, db, login_manager
-from forms import BookmarkForm, LoginForm
+from forms import BookmarkForm, LoginForm, SignupForm
 from models import User, Bookmark
 
 
@@ -63,3 +63,17 @@ def login():
         #    request.args.get("next"): salva la pagina donde queriamos acceder para que cuando nos logueemos nos redirecione a dicha pagina
     flash("Incorrect username or password")
     return render_template("login.html", form=form)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form =SignupForm()
+    if form.validate_on_submit():
+        user = User(email = form.email.data,
+                    username = form.username.data,
+                    password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Welcome, {}! Please login.'.format(user.username))
+        return redirect(url_for('login'))
+
+    return render_template("signup.html",form=form)
