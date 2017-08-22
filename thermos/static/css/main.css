@@ -217,7 +217,7 @@ ul.bookmarks {
     padding-left: 0;
 }
 
-ul.bookmarks li {
+bookmark {
     padding-bottom: .5em;
     border-top: 1px solid #76eabf;
     padding: 1em 0;
@@ -242,6 +242,33 @@ span.editinglinks {
     float: right;
 }
 
+a:hover, aside a:hover, aside a:visited:hover{
+    color: #d39447;
+
+}
+
+aside a {
+    color: #ffd6a3;
+}
+
+aside a:hover {
+    color: #f5bb73;
+}
+
+aside a:visited{
+    color: #1e5337;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #1e5373;
+}
+
+.main aside h3,
+footer h3,
+footer a, 
+footer a:visited {
+    color: white;
+}
 
 /* ==========================================================================
    Media Queries
